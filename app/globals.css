@@ -73,7 +73,7 @@ table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: .85
 .colPlayer { width: 23%; }
 .colLeague { width: 9%; }
 .colTeam { width: 29%; }
-.colNumber { width: 9.75%; }
+.colGames, .colAverage, .colHomeRuns, .colRbi { width: 9.75%; }
 th { padding: 11px 18px; color: #475664; background: #e9eef2; border-bottom: 1px solid var(--line-strong); font-size: .7rem; font-weight: 600; text-align: right; white-space: nowrap; }
 th:first-child, th:nth-child(3) { text-align: left; }
 td { padding: 17px 18px; border-bottom: 1px solid #e2e7eb; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -82,6 +82,8 @@ tbody tr:hover { background: #f7f9fb; }
 td:first-child { min-width: 160px; text-align: left; }
 td:nth-child(3) { text-align: left; }
 .playerCell { display: flex; align-items: center; gap: 15px; }
+.playerIdentity { display: grid; gap: 5px; }
+.mobileTeamBar { display: none; }
 .rank { width: 20px; color: #7d8993; font-size: .72rem; font-variant-numeric: tabular-nums; text-align: center; }
 .league { display: inline-grid; min-width: 26px; min-height: 26px; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: .68rem; font-weight: 700; }
 .league-central { color: #187148; background: #eaf5ef; }
@@ -119,7 +121,16 @@ footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 
   .subRecords dt { min-height: 2em; }
   .subRecords dd { font-size: 1.35rem; }
   .listHeading { padding-right: 16px; padding-left: 16px; }
-  .scrollHint { display: block; margin: 0; padding: 9px 16px; color: var(--muted); background: #f1f4f6; border-right: 1px solid var(--line); border-left: 1px solid var(--line); font-size: .68rem; }
+  .scrollHint { display: none; }
+  .tableWrap { overflow-x: visible; }
+  table { min-width: 0; table-layout: fixed; }
+  .colPlayer { width: 74%; }
+  .colAverage { width: 26%; }
+  .colLeague, .colTeam, .colGames, .colHomeRuns, .colRbi, .mobileHidden { display: none; }
+  th, td { padding-right: 14px; padding-left: 14px; }
+  .playerCell { gap: 10px; }
+  .playerIdentity { min-width: 0; }
+  .mobileTeamBar { display: block; width: min(100%, 112px); height: 3px; background: linear-gradient(90deg, var(--team-primary) 0 72%, var(--team-secondary) 72% 100%); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -91,17 +91,20 @@ export default async function Home() {
                 <col className="colPlayer" />
                 <col className="colLeague" />
                 <col className="colTeam" />
-                <col className="colNumber" span={4} />
+                <col className="colGames" />
+                <col className="colAverage" />
+                <col className="colHomeRuns" />
+                <col className="colRbi" />
               </colgroup>
               <thead>
                 <tr>
                   <th scope="col">選手</th>
-                  <th scope="col">リーグ</th>
-                  <th scope="col">チーム</th>
-                  <th scope="col">試合</th>
+                  <th className="mobileHidden" scope="col">リーグ</th>
+                  <th className="mobileHidden" scope="col">チーム</th>
+                  <th className="mobileHidden" scope="col">試合</th>
                   <th scope="col">打率</th>
-                  <th scope="col">本塁打</th>
-                  <th scope="col">打点</th>
+                  <th className="mobileHidden" scope="col">本塁打</th>
+                  <th className="mobileHidden" scope="col">打点</th>
                 </tr>
               </thead>
               <tbody>
@@ -110,23 +113,29 @@ export default async function Home() {
                     <td>
                       <span className="playerCell">
                         <span className="rank">{index + 1}</span>
-                        <strong>{player.name}</strong>
+                        <span className="playerIdentity">
+                          <strong>{player.name}</strong>
+                          <span
+                            className={`mobileTeamBar ${teamClassNames[player.team] ?? ""}`}
+                            aria-hidden="true"
+                          />
+                        </span>
                       </span>
                     </td>
-                    <td>
+                    <td className="mobileHidden">
                       <span className={`league league-${player.league === "セ" ? "central" : "pacific"}`}>
                         {player.league}
                       </span>
                     </td>
-                    <td>
+                    <td className="mobileHidden">
                       <span className={`teamName ${teamClassNames[player.team] ?? ""}`}>
                         {player.team}
                       </span>
                     </td>
-                    <td>{player.games}</td>
+                    <td className="mobileHidden">{player.games}</td>
                     <td className="average">{player.average.toFixed(3)}</td>
-                    <td>{player.homeRuns}</td>
-                    <td>{player.rbi}</td>
+                    <td className="mobileHidden">{player.homeRuns}</td>
+                    <td className="mobileHidden">{player.rbi}</td>
                   </tr>
                 ))}
               </tbody>
