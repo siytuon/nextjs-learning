@@ -20,6 +20,20 @@ export default async function Home() {
     "広島東洋カープ": "team-carp",
     "東北楽天ゴールデンイーグルス": "team-eagles",
   };
+  const teamShortNames: Record<string, string> = {
+    "阪神タイガース": "神",
+    "読売ジャイアンツ": "巨",
+    "横浜DeNAベイスターズ": "デ",
+    "中日ドラゴンズ": "中",
+    "東京ヤクルトスワローズ": "ヤ",
+    "広島東洋カープ": "広",
+    "北海道日本ハムファイターズ": "日",
+    "福岡ソフトバンクホークス": "ソ",
+    "千葉ロッテマリーンズ": "ロ",
+    "オリックス・バファローズ": "オ",
+    "埼玉西武ライオンズ": "西",
+    "東北楽天ゴールデンイーグルス": "楽",
+  };
   const combinedBattingAverage = (
     players.reduce((sum, player) => sum + player.hits, 0) /
     players.reduce((sum, player) => sum + player.atBats, 0)
@@ -89,6 +103,7 @@ export default async function Home() {
             <table>
               <colgroup>
                 <col className="colPlayer" />
+                <col className="colMobileTeam" />
                 <col className="colLeague" />
                 <col className="colTeam" />
                 <col className="colGames" />
@@ -99,10 +114,11 @@ export default async function Home() {
               <thead>
                 <tr>
                   <th scope="col">選手</th>
+                  <th className="mobileTeamHeading" scope="col">球団</th>
                   <th className="mobileHidden" scope="col">リーグ</th>
                   <th className="mobileHidden" scope="col">チーム</th>
                   <th className="mobileHidden" scope="col">試合</th>
-                  <th scope="col">打率</th>
+                  <th className="mobileMetricHeading" scope="col">打率</th>
                   <th className="mobileHidden" scope="col">本塁打</th>
                   <th className="mobileHidden" scope="col">打点</th>
                 </tr>
@@ -115,11 +131,12 @@ export default async function Home() {
                         <span className="rank">{index + 1}</span>
                         <span className="playerIdentity">
                           <strong>{player.name}</strong>
-                          <span
-                            className={`mobileTeamBar ${teamClassNames[player.team] ?? ""}`}
-                            aria-hidden="true"
-                          />
                         </span>
+                      </span>
+                    </td>
+                    <td className="mobileTeamCell">
+                      <span className={`mobileTeamCode ${teamClassNames[player.team] ?? ""}`}>
+                        {teamShortNames[player.team] ?? "-"}
                       </span>
                     </td>
                     <td className="mobileHidden">

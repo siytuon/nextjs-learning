@@ -71,19 +71,20 @@ h2 { margin-bottom: 4px; font-size: 1.15rem; letter-spacing: .02em; }
 .tableWrap { overflow-x: auto; border: 1px solid var(--line); }
 table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: .85rem; }
 .colPlayer { width: 23%; }
+.colMobileTeam { display: none; }
 .colLeague { width: 9%; }
 .colTeam { width: 29%; }
 .colGames, .colAverage, .colHomeRuns, .colRbi { width: 9.75%; }
 th { padding: 11px 18px; color: #475664; background: #e9eef2; border-bottom: 1px solid var(--line-strong); font-size: .7rem; font-weight: 600; text-align: right; white-space: nowrap; }
-th:first-child, th:nth-child(3) { text-align: left; }
+th:first-child, th:nth-child(4) { text-align: left; }
 td { padding: 17px 18px; border-bottom: 1px solid #e2e7eb; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 tbody tr:last-child td { border-bottom: 0; }
 tbody tr:hover { background: #f7f9fb; }
 td:first-child { min-width: 160px; text-align: left; }
-td:nth-child(3) { text-align: left; }
+td:nth-child(4) { text-align: left; }
 .playerCell { display: flex; align-items: center; gap: 15px; }
-.playerIdentity { display: grid; gap: 5px; }
-.mobileTeamBar { display: none; }
+.playerIdentity { display: grid; }
+.mobileTeamHeading, .mobileTeamCell { display: none; }
 .rank { width: 20px; color: #7d8993; font-size: .72rem; font-variant-numeric: tabular-nums; text-align: center; }
 .league { display: inline-grid; min-width: 26px; min-height: 26px; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: .68rem; font-weight: 700; }
 .league-central { color: #187148; background: #eaf5ef; }
@@ -92,15 +93,15 @@ td:nth-child(3) { text-align: left; }
 .team-hanshin { --team-primary: #27251f; --team-secondary: #f9c900; }
 .team-giants { --team-primary: #d94b00; --team-secondary: #27251f; }
 .team-baystars { --team-primary: #0067b1; --team-secondary: #71c5e8; }
-.team-hawks { --team-primary: #27251f; --team-secondary: #f2c500; }
+.team-hawks { --team-primary: #956300; --team-secondary: #27251f; }
 .team-fighters { --team-primary: #006f86; --team-secondary: #c6a15b; }
 .team-marines { --team-primary: #202020; --team-secondary: #c7c9cb; }
 .team-buffaloes { --team-primary: #1b2b4b; --team-secondary: #a58b4c; }
-.team-lions { --team-primary: #163d6b; --team-secondary: #9d2235; }
-.team-dragons { --team-primary: #164194; --team-secondary: #ffffff; }
+.team-lions { --team-primary: #163d6b; --team-secondary: #79bde8; }
+.team-dragons { --team-primary: #164194; --team-secondary: #c8102e; }
 .team-swallows { --team-primary: #163b33; --team-secondary: #96c93d; }
-.team-carp { --team-primary: #b5122b; --team-secondary: #27251f; }
-.team-eagles { --team-primary: #8b1538; --team-secondary: #d4af37; }
+.team-carp { --team-primary: #c8102e; --team-secondary: #ef9aaa; }
+.team-eagles { --team-primary: #870042; --team-secondary: #e5a8c1; }
 .average { color: var(--accent); font-weight: 700; }
 .notice { margin: 0; padding: 14px 4px; }
 .dataNote { padding: 14px 4px 0; color: var(--muted); font-size: .7rem; line-height: 1.7; }
@@ -124,13 +125,17 @@ footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 
   .scrollHint { display: none; }
   .tableWrap { overflow-x: visible; }
   table { min-width: 0; table-layout: fixed; }
-  .colPlayer { width: 74%; }
-  .colAverage { width: 26%; }
+  .colPlayer { width: 50%; }
+  .colMobileTeam { display: table-column; width: 18%; }
+  .colAverage { width: 32%; }
   .colLeague, .colTeam, .colGames, .colHomeRuns, .colRbi, .mobileHidden { display: none; }
+  .mobileTeamHeading { display: table-cell; text-align: center; }
+  .mobileTeamCell { display: table-cell; padding-right: 4px; padding-left: 4px; text-align: center; }
+  .mobileTeamCode { display: inline-grid; min-width: 25px; min-height: 25px; place-items: center; color: var(--team-primary); border-bottom: 3px solid var(--team-secondary); font-size: .72rem; font-weight: 700; }
+  .mobileMetricHeading, td.average { text-align: center; }
   th, td { padding-right: 14px; padding-left: 14px; }
   .playerCell { gap: 10px; }
   .playerIdentity { min-width: 0; }
-  .mobileTeamBar { display: block; width: min(100%, 112px); height: 3px; background: linear-gradient(90deg, var(--team-primary) 0 72%, var(--team-secondary) 72% 100%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
