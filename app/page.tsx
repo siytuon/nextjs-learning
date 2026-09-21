@@ -16,9 +16,10 @@ export default async function Home() {
     "オリックス・バファローズ": "team-buffaloes",
     "埼玉西武ライオンズ": "team-lions",
   };
-  const averageGames = Math.round(
-    players.reduce((sum, player) => sum + player.games, 0) / players.length,
-  );
+  const combinedBattingAverage = (
+    players.reduce((sum, player) => sum + player.hits, 0) /
+    players.reduce((sum, player) => sum + player.atBats, 0)
+  ).toFixed(3);
 
   return (
     <main>
@@ -60,8 +61,8 @@ export default async function Home() {
               <dd>{averageHomeRuns}<span>本</span></dd>
             </div>
             <div>
-              <dt>平均出場</dt>
-              <dd>{averageGames}<span>試合</span></dd>
+              <dt>平均打率</dt>
+              <dd>{combinedBattingAverage}</dd>
             </div>
             <div>
               <dt>掲載選手</dt>
