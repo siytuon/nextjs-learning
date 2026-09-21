@@ -3,10 +3,19 @@ import { loadPlayers, playerData } from "@/lib/players";
 export default async function Home() {
   const players = await loadPlayers();
   const leader = players[0];
-  const totalHomeRuns = players.reduce(
-    (sum, player) => sum + player.homeRuns,
-    0,
-  );
+  const averageHomeRuns = (
+    players.reduce((sum, player) => sum + player.homeRuns, 0) / players.length
+  ).toFixed(1);
+  const teamClassNames: Record<string, string> = {
+    "阪神タイガース": "team-hanshin",
+    "読売ジャイアンツ": "team-giants",
+    "横浜DeNAベイスターズ": "team-baystars",
+    "福岡ソフトバンクホークス": "team-hawks",
+    "北海道日本ハムファイターズ": "team-fighters",
+    "千葉ロッテマリーンズ": "team-marines",
+    "オリックス・バファローズ": "team-buffaloes",
+    "埼玉西武ライオンズ": "team-lions",
+  };
   const averageGames = Math.round(
     players.reduce((sum, player) => sum + player.games, 0) / players.length,
   );
@@ -47,8 +56,8 @@ export default async function Home() {
           </article>
           <dl className="subRecords">
             <div>
-              <dt>本塁打合計</dt>
-              <dd>{totalHomeRuns}<span>本</span></dd>
+              <dt>平均本塁打</dt>
+              <dd>{averageHomeRuns}<span>本</span></dd>
             </div>
             <div>
               <dt>平均出場</dt>
@@ -73,6 +82,12 @@ export default async function Home() {
           <p className="scrollHint">表は横にスクロールできます</p>
           <div className="tableWrap">
             <table>
+              <colgroup>
+                <col className="colPlayer" />
+                <col className="colLeague" />
+                <col className="colTeam" />
+                <col className="colNumber" span={4} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">選手</th>
@@ -88,11 +103,21 @@ export default async function Home() {
                 {players.map((player, index) => (
                   <tr key={`${player.league}-${player.name}`}>
                     <td>
-                      <span className="rank">{index + 1}</span>
-                      <strong>{player.name}</strong>
+                      <span className="playerCell">
+                        <span className="rank">{index + 1}</span>
+                        <strong>{player.name}</strong>
+                      </span>
                     </td>
-                    <td><span className="league">{player.league}</span></td>
-                    <td>{player.team}</td>
+                    <td>
+                      <span className={`league league-${player.league === "セ" ? "central" : "pacific"}`}>
+                        {player.league}
+                      </span>
+                    </td>
+                    <td>
+                      <span className={`teamName ${teamClassNames[player.team] ?? ""}`}>
+                        {player.team}
+                      </span>
+                    </td>
                     <td>{player.games}</td>
                     <td className="average">{player.average.toFixed(3)}</td>
                     <td>{player.homeRuns}</td>
