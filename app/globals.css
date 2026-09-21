@@ -1,0 +1,107 @@
+:root {
+  --ink: #192532;
+  --muted: #5f6d79;
+  --paper: #f4f6f8;
+  --surface: #ffffff;
+  --line: #d9dfe4;
+  --line-strong: #aeb8c1;
+  --primary: #173552;
+  --accent: #a53d32;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; background: var(--paper); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-feature-settings: "palt";
+}
+
+a { color: inherit; }
+
+.siteHeader { color: #fff; background: var(--primary); border-bottom: 4px solid #b64b3b; }
+
+.headerInner {
+  width: min(1080px, calc(100% - 48px));
+  min-height: 64px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand { display: inline-flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 700; text-decoration: none; letter-spacing: .01em; }
+.brandMark { width: 29px; height: 29px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; }
+.season { margin: 0; color: #dce6ef; font-size: .78rem; font-weight: 600; }
+
+.page { width: min(1080px, calc(100% - 48px)); min-height: calc(100vh - 130px); margin: 0 auto; padding: 54px 0 72px; }
+.pageHeading { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line-strong); }
+.kicker { margin: 0 0 8px; color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .08em; }
+h1, h2, p { margin-top: 0; }
+h1 { margin-bottom: 10px; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: .01em; line-height: 1.2; }
+.description { margin-bottom: 0; color: var(--muted); font-size: .92rem; }
+.updateInfo { display: grid; gap: 5px; flex: 0 0 auto; text-align: right; }
+.updateInfo span { color: var(--muted); font-size: .7rem; }
+.updateInfo time { font-size: .82rem; font-weight: 600; }
+
+.records { display: grid; grid-template-columns: minmax(300px, 1.3fr) minmax(360px, 1fr); margin: 32px 0 48px; background: var(--surface); border: 1px solid var(--line-strong); }
+.primaryRecord { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 30px; border-right: 1px solid var(--line-strong); }
+.recordLabel { margin-bottom: 10px; color: var(--accent); font-size: .72rem; font-weight: 700; }
+.recordPlayer { margin-bottom: 3px; font-size: 1.05rem; font-weight: 700; }
+.recordTeam, .notice, .listHeading p { color: var(--muted); font-size: .75rem; }
+.recordTeam { margin-bottom: 0; }
+.recordValue { margin: 0; color: var(--primary); font-size: clamp(2.8rem, 6vw, 4.25rem); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.subRecords { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; }
+.subRecords div { padding: 27px 22px; border-right: 1px solid var(--line); }
+.subRecords div:last-child { border-right: 0; }
+.subRecords dt { margin-bottom: 12px; color: var(--muted); font-size: .7rem; }
+.subRecords dd { margin: 0; font-size: 1.65rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.subRecords dd span { margin-left: 4px; font-family: inherit; font-size: .7rem; font-weight: 400; }
+
+.playerSection { background: var(--surface); border-top: 3px solid var(--primary); }
+.listHeading { min-height: 82px; padding: 19px 22px 17px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-right: 1px solid var(--line); border-left: 1px solid var(--line); }
+h2 { margin-bottom: 4px; font-size: 1.15rem; letter-spacing: .02em; }
+.listHeading p { margin-bottom: 0; }
+.resultCount { color: var(--ink) !important; font-weight: 600; }
+.scrollHint { display: none; }
+.tableWrap { overflow-x: auto; border: 1px solid var(--line); }
+table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: .85rem; }
+th { padding: 11px 18px; color: #475664; background: #e9eef2; border-bottom: 1px solid var(--line-strong); font-size: .7rem; font-weight: 600; text-align: right; white-space: nowrap; }
+th:first-child, th:nth-child(3) { text-align: left; }
+td { padding: 17px 18px; border-bottom: 1px solid #e2e7eb; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #f7f9fb; }
+td:first-child { display: flex; align-items: center; gap: 15px; min-width: 160px; text-align: left; }
+td:nth-child(3) { text-align: left; }
+.rank { width: 20px; color: #7d8993; font-size: .72rem; font-variant-numeric: tabular-nums; text-align: center; }
+.league { display: inline-grid; min-width: 24px; min-height: 24px; place-items: center; color: var(--primary); background: #e9eef2; border-radius: 50%; font-size: .68rem; font-weight: 700; }
+.average { color: var(--accent); font-weight: 700; }
+.notice { margin: 0; padding: 14px 4px; }
+.dataNote { padding: 14px 4px 0; color: var(--muted); font-size: .7rem; line-height: 1.7; }
+.dataNote p { margin-bottom: 3px; }
+.dataNote a { color: var(--primary); text-underline-offset: 2px; }
+
+footer { color: #dbe4ec; background: #14293d; }
+footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 0; font-size: .68rem; letter-spacing: .03em; }
+
+@media (max-width: 760px) {
+  .headerInner, .page, footer p { width: min(100% - 32px, 1080px); }
+  .page { padding: 38px 0 54px; }
+  .pageHeading { display: block; }
+  .updateInfo { margin-top: 22px; text-align: left; }
+  .records { grid-template-columns: 1fr; margin: 24px 0 38px; }
+  .primaryRecord { padding: 23px 20px; border-right: 0; border-bottom: 1px solid var(--line-strong); }
+  .subRecords div { padding: 20px 14px; }
+  .subRecords dt { min-height: 2em; }
+  .subRecords dd { font-size: 1.35rem; }
+  .listHeading { padding-right: 16px; padding-left: 16px; }
+  .scrollHint { display: block; margin: 0; padding: 9px 16px; color: var(--muted); background: #f1f4f6; border-right: 1px solid var(--line); border-left: 1px solid var(--line); font-size: .68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
