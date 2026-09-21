@@ -79,7 +79,7 @@ export async function loadPlayers(): Promise<Player[]> {
 export const playerData = {
   asOf: "2026-09-20",
   fetchedAt: "2026-09-21",
-  scope: "セ・パ両リーグ 規定打席到達者 打率上位10名",
+  scope: "セ・パ両リーグ 規定打席到達者 全選手",
   sources: [
     {
       label: "セントラル・リーグ個人打撃成績",

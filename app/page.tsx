@@ -15,6 +15,10 @@ export default async function Home() {
     "千葉ロッテマリーンズ": "team-marines",
     "オリックス・バファローズ": "team-buffaloes",
     "埼玉西武ライオンズ": "team-lions",
+    "中日ドラゴンズ": "team-dragons",
+    "東京ヤクルトスワローズ": "team-swallows",
+    "広島東洋カープ": "team-carp",
+    "東北楽天ゴールデンイーグルス": "team-eagles",
   };
   const combinedBattingAverage = (
     players.reduce((sum, player) => sum + player.hits, 0) /

@@ -95,6 +95,10 @@ td:nth-child(3) { text-align: left; }
 .team-marines { --team-primary: #202020; --team-secondary: #c7c9cb; }
 .team-buffaloes { --team-primary: #1b2b4b; --team-secondary: #a58b4c; }
 .team-lions { --team-primary: #163d6b; --team-secondary: #9d2235; }
+.team-dragons { --team-primary: #164194; --team-secondary: #ffffff; }
+.team-swallows { --team-primary: #163b33; --team-secondary: #96c93d; }
+.team-carp { --team-primary: #b5122b; --team-secondary: #27251f; }
+.team-eagles { --team-primary: #8b1538; --team-secondary: #d4af37; }
 .average { color: var(--accent); font-weight: 700; }
 .notice { margin: 0; padding: 14px 4px; }
 .dataNote { padding: 14px 4px 0; color: var(--muted); font-size: .7rem; line-height: 1.7; }
