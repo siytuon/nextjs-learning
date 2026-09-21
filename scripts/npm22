@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -eu
+
+project_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+node_bin="$project_dir/.tools/node-v22.23.2-darwin-arm64/bin"
+
+if [ ! -x "$node_bin/node" ] || [ ! -x "$node_bin/npm" ]; then
+  echo "Node.js 22.23.2 が .tools/ に見つかりません。README.md の環境構築手順を確認してください。" >&2
+  exit 1
+fi
+
+PATH="$node_bin:$PATH"
+export PATH
+
+exec "$node_bin/npm" "$@"
