@@ -8,19 +8,21 @@ React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です�
 
 ## 起動
 
-このリポジトリには、Mac全体のNode.js設定を変えずに使えるNode.js 22を `.tools/` に配置しています。`scripts/npm22` を経由すると、システム側に古いNode.jsが残っていても必ずこのNode.js 22でnpmを実行します。
+このMacでは、ユーザー共通のNode.js 22を `~/.local/` に配置し、bashとzshのどちらでも通常の `node` / `npm` がNode.js 22を使うように設定しています。
+
+このリポジトリの `scripts/npm22` は、環境差による取り違えを防ぐための予備手段です。
 
 ```bash
-./scripts/npm22 run dev
+npm run dev
 ```
 
 ブラウザで <http://localhost:3000> を開きます。
 
-テストと本番ビルドも同じラッパーを使います。
+テストと本番ビルドも通常のnpmコマンドで実行できます。
 
 ```bash
-./scripts/npm22 run lint
-./scripts/npm22 run build
+npm run lint
+npm run build
 ```
 
 ## 主なファイル
