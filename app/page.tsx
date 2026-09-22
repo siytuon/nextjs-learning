@@ -1,16 +1,22 @@
 import PlayerTable from "./player-table";
-import { loadPlayers, playerData } from "@/lib/players";
+import { loadPlayers, playerData, type Player } from "@/lib/players";
+
+function leaderBy(players: Player[], key: "average" | "homeRuns" | "rbi") {
+  return [...players].sort((a, b) => b[key] - a[key])[0];
+}
 
 export default async function Home() {
   const players = await loadPlayers();
-  const leader = players[0];
-  const averageHomeRuns = (
-    players.reduce((sum, player) => sum + player.homeRuns, 0) / players.length
-  ).toFixed(1);
-  const combinedBattingAverage = (
-    players.reduce((sum, player) => sum + player.hits, 0) /
-    players.reduce((sum, player) => sum + player.atBats, 0)
-  ).toFixed(3);
+  const leagueLeaders = (["セ", "パ"] as const).map((league) => {
+    const leaguePlayers = players.filter((player) => player.league === league);
+
+    return {
+      league,
+      average: leaderBy(leaguePlayers, "average"),
+      homeRuns: leaderBy(leaguePlayers, "homeRuns"),
+      rbi: leaderBy(leaguePlayers, "rbi"),
+    };
+  });
 
   return (
     <main>
@@ -37,29 +43,44 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="records" aria-label="成績サマリー">
-          <article className="primaryRecord">
-            <div>
-              <p className="recordLabel">打率トップ</p>
-              <p className="recordPlayer">{leader.name}</p>
-              <p className="recordTeam">{leader.team}</p>
-            </div>
-            <p className="recordValue">{leader.average.toFixed(3)}</p>
-          </article>
-          <dl className="subRecords">
-            <div>
-              <dt>平均本塁打</dt>
-              <dd>{averageHomeRuns}<span>本</span></dd>
-            </div>
-            <div>
-              <dt>平均打率</dt>
-              <dd>{combinedBattingAverage}</dd>
-            </div>
-            <div>
-              <dt>掲載選手</dt>
-              <dd>{players.length}<span>名</span></dd>
-            </div>
-          </dl>
+        <section className="leaderboards" aria-label="リーグ別トップ成績">
+          {leagueLeaders.map((leaders) => (
+            <article
+              className={`leagueBoard leagueBoard-${leaders.league === "セ" ? "central" : "pacific"}`}
+              key={leaders.league}
+            >
+              <header className="leagueBoardHeading">
+                <span>{leaders.league}</span>
+                <h2>{leaders.league === "セ" ? "セントラル・リーグ" : "パシフィック・リーグ"}</h2>
+              </header>
+              <dl className="leaderMetrics">
+                <div>
+                  <dt>打率1位</dt>
+                  <dd>
+                    <strong>{leaders.average.name}</strong>
+                    <span className="leaderValue">{leaders.average.average.toFixed(3)}</span>
+                    <small>{leaders.average.team}</small>
+                  </dd>
+                </div>
+                <div>
+                  <dt>本塁打1位</dt>
+                  <dd>
+                    <strong>{leaders.homeRuns.name}</strong>
+                    <span className="leaderValue">{leaders.homeRuns.homeRuns}<small>本</small></span>
+                    <small>{leaders.homeRuns.team}</small>
+                  </dd>
+                </div>
+                <div>
+                  <dt>打点1位</dt>
+                  <dd>
+                    <strong>{leaders.rbi.name}</strong>
+                    <span className="leaderValue">{leaders.rbi.rbi}<small>点</small></span>
+                    <small>{leaders.rbi.team}</small>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          ))}
         </section>
 
         <PlayerTable players={players} />

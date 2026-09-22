@@ -4,7 +4,7 @@ React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です�
 
 公開URL: <https://siytuon.github.io/nextjs-learning/>
 
-現在は、NPB公式サイトで公開されている2026年度個人打撃成績から、セ・パ両リーグの規定打席到達者上位10名ずつを表示しています。データの詳細と出典は `data/README.md` を参照してください。
+現在は、NPB公式サイトで公開されている2026年度個人打撃成績から、セ・パ両リーグの規定打席到達者全44名を表示しています。データの詳細と出典は `data/README.md` を参照してください。
 
 ## 起動
 
@@ -13,7 +13,7 @@ React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です�
 このリポジトリの `scripts/npm22` は、環境差による取り違えを防ぐための予備手段です。
 
 ```bash
-npm run dev
+./scripts/npm22 run dev
 ```
 
 ブラウザで <http://localhost:3000> を開きます。
@@ -21,13 +21,14 @@ npm run dev
 テストと本番ビルドも通常のnpmコマンドで実行できます。
 
 ```bash
-npm run lint
-npm run build
+./scripts/npm22 run lint
+./scripts/npm22 run build
 ```
 
 ## 主なファイル
 
 - `app/page.tsx`: 画面と選手データ
+- `app/player-table.tsx`: 検索・リーグ絞り込み・並べ替え
 - `data/players-2026.csv`: 学習用の実成績スナップショット
 - `lib/players.ts`: CSVの読み込みと型変換
 - `app/globals.css`: 見た目
