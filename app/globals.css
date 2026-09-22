@@ -67,6 +67,11 @@ h1 { margin-bottom: 10px; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 70
 h2 { margin-bottom: 4px; font-size: 1.15rem; letter-spacing: .02em; }
 .listHeading p { margin-bottom: 0; }
 .resultCount { color: var(--ink) !important; font-weight: 600; }
+.searchField { display: grid; grid-template-columns: auto minmax(220px, 360px); align-items: center; justify-content: end; gap: 12px; padding: 14px 22px; border: 1px solid var(--line); border-bottom: 0; }
+.searchField label { color: var(--muted); font-size: .75rem; font-weight: 600; }
+.searchField input { width: 100%; padding: 10px 12px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 3px; font: inherit; }
+.searchField input:focus { border-color: var(--primary); outline: 2px solid rgba(23, 53, 82, .16); outline-offset: 1px; }
+.emptyResult { margin: 0; padding: 24px; color: var(--muted); border: 1px solid var(--line); border-top: 0; text-align: center; }
 .scrollHint { display: none; }
 .tableWrap { overflow-x: auto; border: 1px solid var(--line); }
 table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: .85rem; }
@@ -122,6 +127,7 @@ footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 
   .subRecords dt { min-height: 2em; }
   .subRecords dd { font-size: 1.35rem; }
   .listHeading { padding-right: 16px; padding-left: 16px; }
+  .searchField { grid-template-columns: 1fr; justify-content: stretch; gap: 7px; padding-right: 16px; padding-left: 16px; }
   .scrollHint { display: none; }
   .tableWrap { overflow-x: visible; }
   table { min-width: 0; table-layout: fixed; }

@@ -1,3 +1,4 @@
+import PlayerTable from "./player-table";
 import { loadPlayers, playerData } from "@/lib/players";
 
 export default async function Home() {
@@ -6,34 +7,6 @@ export default async function Home() {
   const averageHomeRuns = (
     players.reduce((sum, player) => sum + player.homeRuns, 0) / players.length
   ).toFixed(1);
-  const teamClassNames: Record<string, string> = {
-    "阪神タイガース": "team-hanshin",
-    "読売ジャイアンツ": "team-giants",
-    "横浜DeNAベイスターズ": "team-baystars",
-    "福岡ソフトバンクホークス": "team-hawks",
-    "北海道日本ハムファイターズ": "team-fighters",
-    "千葉ロッテマリーンズ": "team-marines",
-    "オリックス・バファローズ": "team-buffaloes",
-    "埼玉西武ライオンズ": "team-lions",
-    "中日ドラゴンズ": "team-dragons",
-    "東京ヤクルトスワローズ": "team-swallows",
-    "広島東洋カープ": "team-carp",
-    "東北楽天ゴールデンイーグルス": "team-eagles",
-  };
-  const teamShortNames: Record<string, string> = {
-    "阪神タイガース": "神",
-    "読売ジャイアンツ": "巨",
-    "横浜DeNAベイスターズ": "デ",
-    "中日ドラゴンズ": "中",
-    "東京ヤクルトスワローズ": "ヤ",
-    "広島東洋カープ": "広",
-    "北海道日本ハムファイターズ": "日",
-    "福岡ソフトバンクホークス": "ソ",
-    "千葉ロッテマリーンズ": "ロ",
-    "オリックス・バファローズ": "オ",
-    "埼玉西武ライオンズ": "西",
-    "東北楽天ゴールデンイーグルス": "楽",
-  };
   const combinedBattingAverage = (
     players.reduce((sum, player) => sum + player.hits, 0) /
     players.reduce((sum, player) => sum + player.atBats, 0)
@@ -89,87 +62,18 @@ export default async function Home() {
           </dl>
         </section>
 
-        <section className="playerSection" aria-labelledby="list-title">
-          <div className="listHeading">
-            <div>
-              <h2 id="list-title">成績一覧</h2>
-              <p>両リーグを通じて打率の高い順に表示</p>
-            </div>
-            <p className="resultCount">全 {players.length} 件</p>
-          </div>
-
-          <p className="scrollHint">表は横にスクロールできます</p>
-          <div className="tableWrap">
-            <table>
-              <colgroup>
-                <col className="colPlayer" />
-                <col className="colMobileTeam" />
-                <col className="colLeague" />
-                <col className="colTeam" />
-                <col className="colGames" />
-                <col className="colAverage" />
-                <col className="colHomeRuns" />
-                <col className="colRbi" />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">選手</th>
-                  <th className="mobileTeamHeading" scope="col">球団</th>
-                  <th className="mobileHidden" scope="col">リーグ</th>
-                  <th className="mobileHidden" scope="col">チーム</th>
-                  <th className="mobileHidden" scope="col">試合</th>
-                  <th className="mobileMetricHeading" scope="col">打率</th>
-                  <th className="mobileHidden" scope="col">本塁打</th>
-                  <th className="mobileHidden" scope="col">打点</th>
-                </tr>
-              </thead>
-              <tbody>
-                {players.map((player, index) => (
-                  <tr key={`${player.league}-${player.name}`}>
-                    <td>
-                      <span className="playerCell">
-                        <span className="rank">{index + 1}</span>
-                        <span className="playerIdentity">
-                          <strong>{player.name}</strong>
-                        </span>
-                      </span>
-                    </td>
-                    <td className="mobileTeamCell">
-                      <span className={`mobileTeamCode ${teamClassNames[player.team] ?? ""}`}>
-                        {teamShortNames[player.team] ?? "-"}
-                      </span>
-                    </td>
-                    <td className="mobileHidden">
-                      <span className={`league league-${player.league === "セ" ? "central" : "pacific"}`}>
-                        {player.league}
-                      </span>
-                    </td>
-                    <td className="mobileHidden">
-                      <span className={`teamName ${teamClassNames[player.team] ?? ""}`}>
-                        {player.team}
-                      </span>
-                    </td>
-                    <td className="mobileHidden">{player.games}</td>
-                    <td className="average">{player.average.toFixed(3)}</td>
-                    <td className="mobileHidden">{player.homeRuns}</td>
-                    <td className="mobileHidden">{player.rbi}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="dataNote">
-            <p>2026年9月21日に取得した学習用スナップショットです。自動更新ではありません。</p>
-            <p>
-              出典: {playerData.sources.map((source, index) => (
-                <span key={source.url}>
-                  {index > 0 && " / "}
-                  <a href={source.url} target="_blank" rel="noreferrer">NPB.jp {source.label}</a>
-                </span>
-              ))}
-            </p>
-          </div>
-        </section>
+        <PlayerTable players={players} />
+        <div className="dataNote">
+          <p>2026年9月21日に取得した学習用スナップショットです。自動更新ではありません。</p>
+          <p>
+            出典: {playerData.sources.map((source, index) => (
+              <span key={source.url}>
+                {index > 0 && " / "}
+                <a href={source.url} target="_blank" rel="noreferrer">NPB.jp {source.label}</a>
+              </span>
+            ))}
+          </p>
+        </div>
       </div>
 
       <footer>
