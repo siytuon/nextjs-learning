@@ -29,6 +29,7 @@ React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です�
 
 - `app/page.tsx`: 画面と選手データ
 - `app/player-table.tsx`: 検索・リーグ絞り込み・並べ替え
+- `app/player-details.tsx`: 選択した選手の詳細成績
 - `data/players-2026.csv`: 学習用の実成績スナップショット
 - `lib/players.ts`: CSVの読み込みと型変換
 - `app/globals.css`: 見た目

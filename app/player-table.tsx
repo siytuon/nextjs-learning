@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Player } from "@/lib/players";
+import PlayerDetails from "./player-details";
 
 type PlayerTableProps = {
   players: Player[];
@@ -49,23 +50,24 @@ const teamShortNames: Record<string, string> = {
 
 export default function PlayerTable({ players }: PlayerTableProps) {
   const [query, setQuery] = useState("");
-  const filteredPlayers = players.filter(
-    (player) =>
-      player.name.includes(query) ||
-      player.team.includes(query),
-  );
-
   const [filterKey, setFilterKey] = useState<FilterKey>("all");
-  const filteredByLeaguePlayers = filteredPlayers.filter((player) => {
+  const [sortKey, setSortKey] = useState<SortKey>("average");
+  const [selectedPlayer, setSelectedPlayer] =
+    useState<Player | null>(null);
+
+  const leaguePlayers = players.filter((player) => {
     if (filterKey === "all") return true;
     if (filterKey === "central") return player.league === "セ";
     if (filterKey === "pacific") return player.league === "パ";
     return true;
   });
-
-  const [sortKey, setSortKey] = useState<SortKey>("average");
-  const sortedPlayers = [...filteredByLeaguePlayers].sort(
-    (a, b) => b[sortKey] - a[sortKey],
+  const rankedPlayers = [...leaguePlayers]
+    .sort((a, b) => b[sortKey] - a[sortKey])
+    .map((player, index) => ({ player, rank: index + 1 }));
+  const visiblePlayers = rankedPlayers.filter(
+    ({ player }) =>
+      player.name.includes(query) ||
+      player.team.includes(query),
   );
 
   return (
@@ -75,7 +77,7 @@ export default function PlayerTable({ players }: PlayerTableProps) {
           <h2 id="list-title">成績一覧</h2>
           <p>{sortLabels[sortKey]}の高い順に表示</p>
         </div>
-        <p className="resultCount">{sortedPlayers.length} 件</p>
+        <p className="resultCount">{visiblePlayers.length} 件</p>
       </div>
 
       <div className="tableTools">
@@ -152,13 +154,20 @@ export default function PlayerTable({ players }: PlayerTableProps) {
             </tr>
           </thead>
           <tbody>
-            {sortedPlayers.map((player, index) => (
+            {visiblePlayers.map(({ player, rank }) => (
               <tr key={`${player.league}-${player.name}`}>
                 <td>
                   <span className="playerCell">
-                    <span className="rank">{index + 1}</span>
+                    <span className="rank">{rank}</span>
                     <span className="playerIdentity">
-                      <strong>{player.name}</strong>
+                      <button
+                        className="playerSelectButton"
+                        type="button"
+                        onClick={() => setSelectedPlayer(player)}
+                        aria-pressed={selectedPlayer?.league === player.league && selectedPlayer?.name === player.name}
+                      >
+                        {player.name}
+                      </button>
                     </span>
                   </span>
                 </td>
@@ -196,7 +205,11 @@ export default function PlayerTable({ players }: PlayerTableProps) {
         </table>
       </div>
 
-      {sortedPlayers.length === 0 && (
+      {selectedPlayer && (
+        <PlayerDetails player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
+      )}
+
+      {visiblePlayers.length === 0 && (
         <p className="emptyResult">条件に一致する選手が見つかりませんでした。</p>
       )}
     </section>
