@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Player } from "@/lib/players";
 import PlayerDetails from "./player-details";
+import TeamBadge from "./team-badge";
 
 type PlayerTableProps = {
   players: Player[];
@@ -16,36 +17,6 @@ const sortLabels: Record<SortKey, string> = {
   average: "打率",
   homeRuns: "本塁打",
   rbi: "打点",
-};
-
-const teamClassNames: Record<string, string> = {
-  "阪神タイガース": "team-hanshin",
-  "読売ジャイアンツ": "team-giants",
-  "横浜DeNAベイスターズ": "team-baystars",
-  "福岡ソフトバンクホークス": "team-hawks",
-  "北海道日本ハムファイターズ": "team-fighters",
-  "千葉ロッテマリーンズ": "team-marines",
-  "オリックス・バファローズ": "team-buffaloes",
-  "埼玉西武ライオンズ": "team-lions",
-  "中日ドラゴンズ": "team-dragons",
-  "東京ヤクルトスワローズ": "team-swallows",
-  "広島東洋カープ": "team-carp",
-  "東北楽天ゴールデンイーグルス": "team-eagles",
-};
-
-const teamShortNames: Record<string, string> = {
-  "阪神タイガース": "神",
-  "読売ジャイアンツ": "巨",
-  "横浜DeNAベイスターズ": "デ",
-  "中日ドラゴンズ": "中",
-  "東京ヤクルトスワローズ": "ヤ",
-  "広島東洋カープ": "広",
-  "北海道日本ハムファイターズ": "日",
-  "福岡ソフトバンクホークス": "ソ",
-  "千葉ロッテマリーンズ": "ロ",
-  "オリックス・バファローズ": "オ",
-  "埼玉西武ライオンズ": "西",
-  "東北楽天ゴールデンイーグルス": "楽",
 };
 
 export default function PlayerTable({ players }: PlayerTableProps) {
@@ -172,9 +143,7 @@ export default function PlayerTable({ players }: PlayerTableProps) {
                   </span>
                 </td>
                 <td className="mobileTeamCell">
-                  <span className={`mobileTeamCode ${teamClassNames[player.team] ?? ""}`}>
-                    {teamShortNames[player.team] ?? "-"}
-                  </span>
+                  <TeamBadge team={player.team} />
                 </td>
                 <td className="mobileHidden">
                   <span className={`league league-${player.league === "セ" ? "central" : "pacific"}`}>
@@ -182,9 +151,7 @@ export default function PlayerTable({ players }: PlayerTableProps) {
                   </span>
                 </td>
                 <td className="mobileHidden">
-                  <span className={`teamName ${teamClassNames[player.team] ?? ""}`}>
-                    {player.team}
-                  </span>
+                  <TeamBadge team={player.team} showName />
                 </td>
                 <td className="mobileHidden">{player.games}</td>
                 <td className={`mobileMetricValue ${sortKey === "average" ? "selectedMetric" : ""}`}>

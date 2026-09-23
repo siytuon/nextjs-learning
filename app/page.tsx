@@ -1,4 +1,5 @@
 import PlayerTable from "./player-table";
+import TeamBadge from "./team-badge";
 import { loadPlayers, playerData, type Player } from "@/lib/players";
 
 function leaderBy(players: Player[], key: "average" | "homeRuns" | "rbi") {
@@ -57,25 +58,31 @@ export default async function Home() {
                 <div>
                   <dt>打率1位</dt>
                   <dd>
-                    <strong>{leaders.average.name}</strong>
+                    <span className="leaderPlayer">
+                      <strong>{leaders.average.name}</strong>
+                      <TeamBadge team={leaders.average.team} />
+                    </span>
                     <span className="leaderValue">{leaders.average.average.toFixed(3)}</span>
-                    <small>{leaders.average.team}</small>
                   </dd>
                 </div>
                 <div>
                   <dt>本塁打1位</dt>
                   <dd>
-                    <strong>{leaders.homeRuns.name}</strong>
+                    <span className="leaderPlayer">
+                      <strong>{leaders.homeRuns.name}</strong>
+                      <TeamBadge team={leaders.homeRuns.team} />
+                    </span>
                     <span className="leaderValue">{leaders.homeRuns.homeRuns}<small>本</small></span>
-                    <small>{leaders.homeRuns.team}</small>
                   </dd>
                 </div>
                 <div>
                   <dt>打点1位</dt>
                   <dd>
-                    <strong>{leaders.rbi.name}</strong>
+                    <span className="leaderPlayer">
+                      <strong>{leaders.rbi.name}</strong>
+                      <TeamBadge team={leaders.rbi.team} />
+                    </span>
                     <span className="leaderValue">{leaders.rbi.rbi}<small>点</small></span>
-                    <small>{leaders.rbi.team}</small>
                   </dd>
                 </div>
               </dl>

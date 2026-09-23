@@ -1,4 +1,5 @@
 import type { Player } from "@/lib/players";
+import TeamBadge from "./team-badge";
 
 type PlayerDetailsProps = {
   player: Player;
@@ -17,7 +18,9 @@ export default function PlayerDetails({
             {player.league}・リーグ
           </p>
           <h3 id="player-details-title">{player.name}</h3>
-          <p className="playerDetailsTeam">{player.team}</p>
+          <div className="playerDetailsTeam">
+            <TeamBadge team={player.team} showName />
+          </div>
         </div>
         <button
           className="playerDetailsClose"
