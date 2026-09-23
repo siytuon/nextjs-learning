@@ -1,7 +1,7 @@
 import Image from "next/image";
 import PlayerTable from "./player-table";
 import TeamBadge from "./team-badge";
-import notebookIcon from "./notebook-icon.jpg";
+import notebookIcon from "./notebook-icon.png";
 import { loadPlayers, playerData, type Player } from "@/lib/players";
 
 function leaderBy(players: Player[], key: "average" | "homeRuns" | "rbi") {
@@ -26,7 +26,7 @@ export default async function Home() {
       <header className="siteHeader">
         <div className="headerInner">
           <a className="brand" href="#top" aria-label="NPB Notebook ホーム">
-            <Image className="brandIcon" src={notebookIcon} alt="" width={32} height={32} priority unoptimized />
+            <Image className="brandIcon" src={notebookIcon} alt="" width={34} height={34} priority unoptimized />
             <span>NPB Notebook</span>
           </a>
           <p className="season">2026年度</p>
