@@ -35,7 +35,7 @@ a { color: inherit; }
 }
 
 .brand { display: inline-flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 700; text-decoration: none; letter-spacing: .01em; }
-.brandMark { width: 29px; height: 29px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; }
+.brandIcon { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.72); border-radius: 8px; }
 .season { margin: 0; color: #dce6ef; font-size: .78rem; font-weight: 600; }
 
 .page { width: min(1080px, calc(100% - 48px)); min-height: calc(100vh - 130px); margin: 0 auto; padding: 54px 0 72px; }

@@ -1,5 +1,7 @@
+import Image from "next/image";
 import PlayerTable from "./player-table";
 import TeamBadge from "./team-badge";
+import notebookIcon from "./notebook-icon.jpg";
 import { loadPlayers, playerData, type Player } from "@/lib/players";
 
 function leaderBy(players: Player[], key: "average" | "homeRuns" | "rbi") {
@@ -23,9 +25,9 @@ export default async function Home() {
     <main>
       <header className="siteHeader">
         <div className="headerInner">
-          <a className="brand" href="#top" aria-label="Ballpark Stats ホーム">
-            <span className="brandMark" aria-hidden="true">B</span>
-            <span>Ballpark Stats</span>
+          <a className="brand" href="#top" aria-label="NPB Notebook ホーム">
+            <Image className="brandIcon" src={notebookIcon} alt="" width={32} height={32} priority unoptimized />
+            <span>NPB Notebook</span>
           </a>
           <p className="season">2026年度</p>
         </div>
@@ -105,7 +107,7 @@ export default async function Home() {
       </div>
 
       <footer>
-        <p>Ballpark Stats — React / Next.js 学習プロジェクト</p>
+        <p>NPB Notebook — React / Next.js 学習プロジェクト</p>
       </footer>
     </main>
   );

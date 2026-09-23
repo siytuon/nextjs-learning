@@ -1,4 +1,4 @@
-# Ballpark Stats
+# NPB Notebook
 
 React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です。
 
@@ -31,6 +31,8 @@ React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です�
 - `app/player-table.tsx`: 検索・リーグ絞り込み・並べ替え
 - `app/player-details.tsx`: 選択した選手の詳細成績
 - `app/team-badge.tsx`: 表とサマリーで共通利用する球団バッジ
+- `app/icon.png`: ブラウザタブなどに表示するサイトアイコン
+- `app/notebook-icon.jpg`: ヘッダーに表示するサイトアイコン
 - `data/players-2026.csv`: 学習用の実成績スナップショット
 - `lib/players.ts`: CSVの読み込みと型変換
 - `lib/teams.ts`: 球団コードと表示用クラスの定義
