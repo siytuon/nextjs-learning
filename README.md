@@ -31,8 +31,9 @@ React / Next.js 学習用の「プロ野球ミニ成績分析ツール」です�
 - `app/player-table.tsx`: 検索・リーグ絞り込み・並べ替え
 - `app/player-details.tsx`: 選択した選手の詳細成績
 - `app/team-badge.tsx`: 表とサマリーで共通利用する球団バッジ
-- `app/icon.png`: ブラウザタブなどに表示するサイトアイコン
-- `app/apple-icon.png`: iPhoneのホーム画面などに表示するApple Touch Icon
+- `public/favicon.ico`: Safariを含むブラウザ向けの複数サイズ対応favicon
+- `public/favicon-32x32.png` / `public/favicon-64x64.png`: 固定URLで配信するPNG favicon
+- `public/apple-touch-icon.png`: iPhoneのホーム画面などに表示するApple Touch Icon
 - `app/notebook-icon.png`: ヘッダーに表示するサイトアイコン
 - `data/players-2026.csv`: 学習用の実成績スナップショット
 - `lib/players.ts`: CSVの読み込みと型変換
