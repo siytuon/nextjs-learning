@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import type { Player } from "@/lib/players";
-import PlayerDetails from "./player-details";
 import TeamBadge from "./team-badge";
 
 type PlayerTableProps = {
   players: Player[];
+  selectedPlayers: Player[];
+  onTogglePlayer: (player: Player) => void;
 };
 
 type SortKey = "average" | "homeRuns" | "rbi";
@@ -19,13 +20,14 @@ const sortLabels: Record<SortKey, string> = {
   rbi: "打点",
 };
 
-export default function PlayerTable({ players }: PlayerTableProps) {
+export default function PlayerTable({
+  players,
+  selectedPlayers,
+  onTogglePlayer,
+}: PlayerTableProps) {
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState<FilterKey>("all");
   const [sortKey, setSortKey] = useState<SortKey>("average");
-  const [selectedPlayer, setSelectedPlayer] =
-    useState<Player | null>(null);
-
   const leaguePlayers = players.filter((player) => {
     if (filterKey === "all") return true;
     if (filterKey === "central") return player.league === "セ";
@@ -134,8 +136,12 @@ export default function PlayerTable({ players }: PlayerTableProps) {
                       <button
                         className="playerSelectButton"
                         type="button"
-                        onClick={() => setSelectedPlayer(player)}
-                        aria-pressed={selectedPlayer?.league === player.league && selectedPlayer?.name === player.name}
+                        onClick={() => onTogglePlayer(player)}
+                        aria-pressed={selectedPlayers.some(
+                          (selectedPlayer) =>
+                            selectedPlayer.league === player.league &&
+                            selectedPlayer.name === player.name,
+                        )}
                       >
                         {player.name}
                       </button>
@@ -171,10 +177,6 @@ export default function PlayerTable({ players }: PlayerTableProps) {
           </tbody>
         </table>
       </div>
-
-      {selectedPlayer && (
-        <PlayerDetails player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
-      )}
 
       {visiblePlayers.length === 0 && (
         <p className="emptyResult">条件に一致する選手が見つかりませんでした。</p>

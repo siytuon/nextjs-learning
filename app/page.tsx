@@ -1,7 +1,6 @@
 import Image from "next/image";
-import PlayerTable from "./player-table";
-import TeamBadge from "./team-badge";
 import notebookIcon from "./notebook-icon.png";
+import PlayerDashboard from "./player-dashboard";
 import { loadPlayers, playerData, type Player } from "@/lib/players";
 
 function leaderBy(players: Player[], key: "average" | "homeRuns" | "rbi") {
@@ -46,53 +45,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="leaderboards" aria-label="リーグ別トップ成績">
-          {leagueLeaders.map((leaders) => (
-            <article
-              className={`leagueBoard leagueBoard-${leaders.league === "セ" ? "central" : "pacific"}`}
-              key={leaders.league}
-            >
-              <header className="leagueBoardHeading">
-                <span>{leaders.league}</span>
-                <h2>{leaders.league === "セ" ? "セントラル・リーグ" : "パシフィック・リーグ"}</h2>
-              </header>
-              <dl className="leaderMetrics">
-                <div>
-                  <dt>打率1位</dt>
-                  <dd>
-                    <span className="leaderPlayer">
-                      <strong>{leaders.average.name}</strong>
-                      <TeamBadge team={leaders.average.team} />
-                    </span>
-                    <span className="leaderValue">{leaders.average.average.toFixed(3)}</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>本塁打1位</dt>
-                  <dd>
-                    <span className="leaderPlayer">
-                      <strong>{leaders.homeRuns.name}</strong>
-                      <TeamBadge team={leaders.homeRuns.team} />
-                    </span>
-                    <span className="leaderValue">{leaders.homeRuns.homeRuns}<small>本</small></span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>打点1位</dt>
-                  <dd>
-                    <span className="leaderPlayer">
-                      <strong>{leaders.rbi.name}</strong>
-                      <TeamBadge team={leaders.rbi.team} />
-                    </span>
-                    <span className="leaderValue">{leaders.rbi.rbi}<small>点</small></span>
-                  </dd>
-                </div>
-              </dl>
-            </article>
-          ))}
-        </section>
-
-        <PlayerTable players={players} />
+        <PlayerDashboard players={players} leagueLeaders={leagueLeaders} />
         <div className="dataNote">
           <p>2026年9月21日に取得した学習用スナップショットです。自動更新ではありません。</p>
           <p>

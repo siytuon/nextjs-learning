@@ -63,7 +63,11 @@ h1 { margin-bottom: 10px; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 70
 .leaderMetrics dt { margin-bottom: 10px; color: var(--muted); font-size: .68rem; font-weight: 600; }
 .leaderMetrics dd { display: grid; gap: 5px; margin: 0; }
 .leaderPlayer { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 7px; }
-.leaderPlayer strong { overflow: hidden; font-size: .9rem; text-overflow: ellipsis; white-space: nowrap; }
+.leaderSelectButton { min-width: 0; overflow: hidden; padding: 2px 0; color: var(--ink); background: transparent; border: 0; font: inherit; font-size: .9rem; font-weight: 700; text-align: left; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; transform-origin: left center; transition: color .15s ease, transform .15s ease; }
+.leaderSelectButton:hover { color: var(--accent); transform: scale(1.04); }
+.leaderSelectButton:focus-visible { outline: 2px solid rgba(23, 53, 82, .25); outline-offset: 3px; }
+.leaderSelectButton[aria-pressed="true"] { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; transform: scale(1.03); }
+.leaderSelectButton:active { transform: scale(.98); }
 .leaderPlayer .teamBadge { width: 23px; height: 23px; flex-basis: 23px; border-radius: 4px; font-size: .58rem; }
 .leaderValue { color: var(--primary); font-size: 1.65rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
 .leaderValue small { margin-left: 3px; font-size: .62rem; font-weight: 500; }
@@ -152,16 +156,35 @@ td:nth-child(4) { text-align: left; }
 .playerDetailsLeague { display: inline-block; margin: 0; padding: 3px 7px; border: 1px solid currentColor; border-radius: 999px; font-size: .68rem; font-weight: 700; }
 .playerDetailsTeam { margin-top: 9px; }
 .playerDetailsTeam .teamLabel { color: var(--muted); font-size: .75rem; }
-.playerDetailsClose { padding: 6px 9px; color: var(--muted); background: transparent; border: 1px solid var(--line-strong); border-radius: 3px; font: inherit; font-size: .7rem; cursor: pointer; transition: color .15s ease, border-color .15s ease, transform .15s ease; }
-.playerDetailsClose:hover { color: var(--primary); border-color: var(--primary); transform: scale(1.05); }
-.playerDetailsClose:active { transform: scale(.97); }
-.playerDetailsClose:focus-visible { outline: 2px solid rgba(23, 53, 82, .25); outline-offset: 2px; }
+.playerDetailsActions { display: grid; gap: 7px; justify-items: end; }
+.playerDetailsActions button { padding: 6px 9px; color: var(--muted); background: transparent; border: 1px solid var(--line-strong); border-radius: 3px; font: inherit; font-size: .7rem; cursor: pointer; transition: color .15s ease, border-color .15s ease, transform .15s ease; }
+.playerDetailsActions button:first-child { color: var(--accent); border-color: #d3a19b; }
+.playerDetailsActions button:hover { color: var(--primary); border-color: var(--primary); transform: scale(1.05); }
+.playerDetailsActions button:active { transform: scale(.97); }
+.playerDetailsActions button:focus-visible { outline: 2px solid rgba(23, 53, 82, .25); outline-offset: 2px; }
 .playerDetailsGrid { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; }
 .playerDetailsGrid > div { padding: 14px 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .playerDetailsGrid > div:nth-child(3n) { border-right: 0; }
 .playerDetailsGrid > div:nth-last-child(-n + 3) { border-bottom: 0; }
 .playerDetailsGrid dt { margin-bottom: 7px; color: var(--muted); font-size: .65rem; }
 .playerDetailsGrid dd { margin: 0; color: var(--primary); font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.playerComparison { position: fixed; z-index: 20; top: 84px; right: 20px; width: min(460px, calc(100% - 40px)); max-height: calc(100vh - 104px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line-strong); border-top: 4px solid var(--accent); box-shadow: 0 12px 32px rgba(20, 41, 61, .16); }
+.playerComparisonHeader { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; padding: 17px 20px; border-bottom: 1px solid var(--line); }
+.playerComparisonHeader p { margin: 0 0 4px; color: var(--accent); font-size: .68rem; font-weight: 700; }
+.playerComparisonHeader h3 { margin: 0; font-size: 1.2rem; }
+.playerComparisonHeader .playerComparisonHint { max-width: 180px; margin: 0; color: var(--muted); font-weight: 500; text-align: right; }
+.comparisonPlayers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.comparisonPlayer { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 14px 16px; }
+.comparisonPlayer:first-child { border-right: 1px solid var(--line); }
+.comparisonPlayer strong { overflow: hidden; font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }
+.comparisonPlayer button { padding: 4px 6px; color: var(--muted); background: transparent; border: 1px solid var(--line-strong); border-radius: 3px; font: inherit; font-size: .62rem; cursor: pointer; }
+.comparisonMetrics { margin: 0; }
+.comparisonMetrics > div { display: grid; grid-template-columns: 82px repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.comparisonMetrics > div:last-child { border-bottom: 0; }
+.comparisonMetrics dt, .comparisonMetrics dd { margin: 0; padding: 11px 14px; }
+.comparisonMetrics dt { color: var(--muted); background: #f7f9fb; font-size: .68rem; }
+.comparisonMetrics dd { border-left: 1px solid var(--line); color: var(--primary); font-size: .9rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.comparisonMetrics .comparisonLeader { color: var(--accent); background: #fff8f6; }
 .notice { margin: 0; padding: 14px 4px; }
 .dataNote { padding: 14px 4px 0; color: var(--muted); font-size: .7rem; line-height: 1.7; }
 .dataNote p { margin-bottom: 3px; }
@@ -179,7 +202,7 @@ footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 
   .leagueBoardHeading { padding: 13px 15px; }
   .leaderMetrics > div { padding: 15px 12px 16px; }
   .leaderMetrics dt { min-height: auto; }
-  .leaderMetrics strong { font-size: .82rem; }
+  .leaderSelectButton { font-size: .82rem; }
   .leaderValue { font-size: 1.4rem; }
   .listHeading { padding-right: 16px; padding-left: 16px; }
   .tableTools { grid-template-columns: 1fr; gap: 11px; padding: 14px 16px; }
@@ -206,11 +229,18 @@ footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 
   .playerCell { gap: 10px; }
   .playerIdentity { min-width: 0; }
   .playerDetails { top: 12px; right: 12px; bottom: auto; width: calc(100% - 24px); max-height: min(68vh, 560px); }
+  .playerComparison { top: 12px; right: 12px; bottom: auto; width: calc(100% - 24px); max-height: min(78vh, 650px); }
   .playerDetailsHeader { padding: 16px; }
   .playerDetailsGrid > div { padding: 12px 13px; }
+  .playerComparisonHeader { display: block; padding: 14px 16px; }
+  .playerComparisonHeader .playerComparisonHint { max-width: none; margin-top: 6px; text-align: left; }
+  .comparisonPlayer { padding: 12px 10px; }
+  .comparisonPlayer .teamBadge { display: none; }
+  .comparisonMetrics > div { grid-template-columns: 70px repeat(2, minmax(0, 1fr)); }
+  .comparisonMetrics dt, .comparisonMetrics dd { padding: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .filterLeague button, .sortControls button, .tableSortButton, .playerSelectButton, .playerDetailsClose { transition: none; transform: none !important; }
+  .filterLeague button, .sortControls button, .tableSortButton, .playerSelectButton, .leaderSelectButton, .playerDetailsActions button, .comparisonPlayer button { transition: none; transform: none !important; }
 }

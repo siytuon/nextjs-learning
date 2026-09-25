@@ -4,11 +4,13 @@ import TeamBadge from "./team-badge";
 type PlayerDetailsProps = {
   player: Player;
   onClose: () => void;
+  onAddComparison?: () => void;
 };
 
 export default function PlayerDetails({
   player,
   onClose,
+  onAddComparison,
 }: PlayerDetailsProps) {
   return (
     <aside className="playerDetails" aria-labelledby="player-details-title">
@@ -22,14 +24,20 @@ export default function PlayerDetails({
             <TeamBadge team={player.team} showName />
           </div>
         </div>
-        <button
-          className="playerDetailsClose"
-          type="button"
-          onClick={onClose}
-          aria-label={`${player.name}の詳細を閉じる`}
-        >
-          閉じる
-        </button>
+        <div className="playerDetailsActions">
+          {onAddComparison && (
+            <button type="button" onClick={onAddComparison}>
+              比較選手を追加
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={`${player.name}の詳細を閉じる`}
+          >
+            閉じる
+          </button>
+        </div>
       </header>
 
       <dl className="playerDetailsGrid">
