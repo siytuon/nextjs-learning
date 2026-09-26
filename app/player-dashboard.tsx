@@ -62,6 +62,11 @@ export default function PlayerDashboard({
     );
   }
 
+  function clearSelectedPlayers() {
+    setSelectedPlayers([]);
+    setIsDetailsOpen(false);
+  }
+
   return (
     <>
       <section className="leaderboards" aria-label="リーグ別トップ成績">
@@ -141,10 +146,7 @@ export default function PlayerDashboard({
         <PlayerDetails
           player={selectedPlayers[0]}
           onAddComparison={() => setIsDetailsOpen(false)}
-          onClose={() => {
-            setSelectedPlayers([]);
-            setIsDetailsOpen(false);
-          }}
+          onClose={clearSelectedPlayers}
         />
       )}
 
@@ -153,6 +155,7 @@ export default function PlayerDashboard({
           players={[selectedPlayers[0], selectedPlayers[1]]}
           allPlayers={players}
           onRemovePlayer={togglePlayer}
+          onClose={clearSelectedPlayers}
         />
       )}
     </>

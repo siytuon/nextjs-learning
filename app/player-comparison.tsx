@@ -6,6 +6,7 @@ type PlayerComparisonProps = {
   players: [Player, Player];
   allPlayers: Player[];
   onRemovePlayer: (player: Player) => void;
+  onClose: () => void;
 };
 
 const comparisonRows = [
@@ -27,6 +28,7 @@ export default function PlayerComparison({
   players,
   allPlayers,
   onRemovePlayer,
+  onClose,
 }: PlayerComparisonProps) {
   return (
     <aside className="playerComparison" aria-labelledby="player-comparison-title">
@@ -35,7 +37,12 @@ export default function PlayerComparison({
           <p>2選手を比較</p>
           <h3 id="player-comparison-title">成績比較</h3>
         </div>
-        <p className="playerComparisonHint">選手名をもう一度押すと解除できます</p>
+        <div className="playerComparisonHeaderActions">
+          <p className="playerComparisonHint">選手名をもう一度押すと解除できます</p>
+          <button type="button" onClick={onClose} aria-label="選手比較を終了する">
+            閉じる
+          </button>
+        </div>
       </header>
 
       <div className="comparisonPlayers">
