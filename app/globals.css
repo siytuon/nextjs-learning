@@ -185,6 +185,19 @@ td:nth-child(4) { text-align: left; }
 .comparisonMetrics dt { color: var(--muted); background: #f7f9fb; font-size: .68rem; }
 .comparisonMetrics dd { border-left: 1px solid var(--line); color: var(--primary); font-size: .9rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
 .comparisonMetrics .comparisonLeader { color: var(--accent); background: #fff8f6; }
+.comparisonCharts { padding: 17px 20px 20px; background: #fbfcfd; border-top: 1px solid var(--line-strong); }
+.comparisonCharts > header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.comparisonCharts h4 { margin: 0; font-size: .86rem; }
+.comparisonCharts > header p { margin: 0; color: var(--muted); font-size: .62rem; }
+.comparisonChart + .comparisonChart { margin-top: 15px; }
+.comparisonChart h5 { margin: 0 0 7px; color: var(--muted); font-size: .66rem; }
+.comparisonBarRow { display: grid; grid-template-columns: 82px minmax(0, 1fr) 48px; align-items: center; gap: 8px; min-height: 24px; }
+.comparisonBarName { overflow: hidden; font-size: .66rem; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.comparisonBarTrack { height: 10px; overflow: hidden; background: #e6ebef; border-radius: 999px; }
+.comparisonBar { display: block; height: 100%; border-radius: inherit; }
+.comparisonBar-1 { background: linear-gradient(90deg, #315b7d, #5c86a5); }
+.comparisonBar-2 { background: linear-gradient(90deg, #a53d32, #cf7469); }
+.comparisonBarRow strong { color: var(--primary); font-size: .68rem; font-variant-numeric: tabular-nums; text-align: right; }
 .notice { margin: 0; padding: 14px 4px; }
 .dataNote { padding: 14px 4px 0; color: var(--muted); font-size: .7rem; line-height: 1.7; }
 .dataNote p { margin-bottom: 3px; }
@@ -238,6 +251,10 @@ footer p { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 22px 
   .comparisonPlayer .teamBadge { display: none; }
   .comparisonMetrics > div { grid-template-columns: 70px repeat(2, minmax(0, 1fr)); }
   .comparisonMetrics dt, .comparisonMetrics dd { padding: 10px; }
+  .comparisonCharts { padding: 15px 12px 17px; }
+  .comparisonCharts > header { display: block; }
+  .comparisonCharts > header p { margin-top: 4px; }
+  .comparisonBarRow { grid-template-columns: 74px minmax(0, 1fr) 44px; gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
