@@ -1,8 +1,10 @@
 import type { Player } from "@/lib/players";
+import PlayerRadarChart from "./player-radar-chart";
 import TeamBadge from "./team-badge";
 
 type PlayerComparisonProps = {
   players: [Player, Player];
+  allPlayers: Player[];
   onRemovePlayer: (player: Player) => void;
 };
 
@@ -17,18 +19,13 @@ const comparisonRows = [
   { label: "盗塁", key: "stolenBases", decimals: undefined },
 ] as const;
 
-const chartRows = comparisonRows.filter((row) =>
-  ["average", "homeRuns", "rbi", "onBasePercentage", "sluggingPercentage"].includes(
-    row.key,
-  ),
-);
-
 function formatValue(value: number, decimals?: number) {
   return decimals === undefined ? value : value.toFixed(decimals);
 }
 
 export default function PlayerComparison({
   players,
+  allPlayers,
   onRemovePlayer,
 }: PlayerComparisonProps) {
   return (
@@ -76,44 +73,7 @@ export default function PlayerComparison({
         })}
       </dl>
 
-      <section className="comparisonCharts" aria-labelledby="comparison-chart-title">
-        <header>
-          <h4 id="comparison-chart-title">主要成績グラフ</h4>
-          <p>各項目の大きい値を100%として表示</p>
-        </header>
-
-        {chartRows.map((row) => {
-          const values = players.map((player) => player[row.key]);
-          const maxValue = Math.max(...values);
-
-          return (
-            <div className="comparisonChart" key={row.key}>
-              <h5>{row.label}</h5>
-              {players.map((player, index) => {
-                const value = values[index];
-                const percentage = maxValue === 0 ? 0 : (value / maxValue) * 100;
-
-                return (
-                  <div
-                    className="comparisonBarRow"
-                    key={`${player.league}-${player.name}`}
-                    aria-label={`${player.name}の${row.label} ${formatValue(value, row.decimals)}`}
-                  >
-                    <span className="comparisonBarName">{player.name}</span>
-                    <span className="comparisonBarTrack" aria-hidden="true">
-                      <span
-                        className={`comparisonBar comparisonBar-${index + 1}`}
-                        style={{ width: `${percentage}%` }}
-                      />
-                    </span>
-                    <strong>{formatValue(value, row.decimals)}</strong>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
-      </section>
+      <PlayerRadarChart players={players} allPlayers={allPlayers} />
     </aside>
   );
 }

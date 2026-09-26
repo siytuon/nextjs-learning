@@ -151,6 +151,7 @@ export default function PlayerDashboard({
       {selectedPlayers.length === 2 && (
         <PlayerComparison
           players={[selectedPlayers[0], selectedPlayers[1]]}
+          allPlayers={players}
           onRemovePlayer={togglePlayer}
         />
       )}
